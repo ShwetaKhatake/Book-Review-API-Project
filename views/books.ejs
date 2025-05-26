@@ -1,0 +1,47 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Books</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+  
+  
+  <h2>Books</h2>
+
+  <form method="GET" action="/books" class="row g-2 mb-4">
+    <div class="col-md-3">
+      <input type="text" name="author" class="form-control" placeholder="Filter by author" value="<%= filters.author %>">
+    </div>
+    <div class="col-md-3">
+      <input type="text" name="genre" class="form-control" placeholder="Filter by genre" value="<%= filters.genre %>">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+  </form>
+
+  <ul class="list-group mb-4">
+    <% books.forEach(book => { %>
+      <li class="list-group-item">
+        <strong><%= book.title %></strong> by <%= book.author %> — <%= book.genre %>
+        <div class="text-muted small">Added by <%= book.createdBy?.username || 'Unknown' %></div>
+        <a href="/books/<%= book._id %>" class="btn btn-outline-primary btn-sm">View Details</a>
+      </li>
+    <% }) %>
+  </ul>
+
+  <nav>
+    <ul class="pagination">
+      <% for(let i = 1; i <= totalPages; i++) { %>
+        <li class="page-item <%= i === page ? 'active' : '' %>">
+          <a class="page-link" href="?page=<%= i %>&author=<%= filters.author %>&genre=<%= filters.genre %>"><%= i %></a>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= book.title %> | Book Details</title>
+  
+</head>
+<body class="container mt-4">
+<form action="/books/<%= bookId %>/reviews" method="POST">
+    <div class="mb-2">
+      <label>Rating</label>
+      <select name="rating" class="form-select" required>
+        <option value="">Choose</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div class="mb-2">
+      <label>Comment</label>
+      <textarea name="comment" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+  </form>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

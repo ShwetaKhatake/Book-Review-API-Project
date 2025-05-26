@@ -1,0 +1,68 @@
+
+<!-- views/book.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= book.title %> | Book Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+<h2><%= book.title %></h2>
+<p><strong>Author:</strong> <%= book.author %></p>
+<p><strong>Genre:</strong> <%= book.genre %></p>
+<p><strong>Posted by:</strong> <%= book.createdBy?.username || 'Unknown' %></p>
+
+<hr>
+<h4>Reviews:</h4>
+
+<% if (reviews.length === 0) { %>
+  <p>No reviews yet.</p>
+<% } else { %>
+  <% reviews.forEach(r => { %>
+    <div class="border rounded p-2 mb-2">
+      <strong><%= r.user.username %></strong> rated <%= r.rating %>/5
+      <br>
+      <small><%= r.createdAt.toDateString() %></small>
+      <p><%= r.comment %></p>
+
+      <% if (user && r.user._id.toString() === user.id) { %>
+        <!-- Update Review Form -->
+        <form action="/reviews/<%= r._id %>?_method=PUT" method="POST" class="mt-2">
+          <div class="row g-2 align-items-center">
+            <div class="col-auto">
+              <select name="rating" class="form-select form-select-sm" required>
+                <% for (let i = 1; i <= 5; i++) { %>
+                  <option value="<%= i %>" <%= r.rating === i ? 'selected' : '' %>><%= i %></option>
+                <% } %>
+              </select>
+            </div>
+            <div class="col">
+              <textarea name="comment" class="form-control form-control-sm" rows="1"><%= r.comment %></textarea>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-sm btn-warning">Update Review</button>
+            </div>
+          </div>
+        </form>
+
+        <!----- Delete Form -->
+        <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST" class="mt-1"
+          onsubmit="return confirm('Are you sure you want to delete this review?');">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+      <% } %>
+    </div>
+  <% }) %>
+<% } %>
+
+
+<hr>
+<% if (token) { %>
+  <%- include('partials/review-form', { bookId: book._id }) %>
+<% } else { %>
+  <p><a href="/login">Login to write a review</a></p>
+<% } %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
