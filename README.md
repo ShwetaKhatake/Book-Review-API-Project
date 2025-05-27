@@ -21,7 +21,6 @@ A full-stack web application for managing books and reviews with JWT-based authe
 
 bash
 git clone https://github.com/ShwetaKhatake/Book-Review-API-Project.git
-cd book-review-app
 
 ### 2. Install Dependencies
 
