@@ -15,26 +15,26 @@ A full-stack web application for managing books and reviews with JWT-based authe
 
 
 
-## Setup Instructions
+# Setup Instructions
 
-### 1. Clone the Repository
+# 1. Clone the Repository
 
 bash
 git clone https://github.com/ShwetaKhatake/Book-Review-API-Project.git
 
-### 2. Install Dependencies
+# 2. Install Dependencies
 
 npm install
 
-### 4. Start MongoDB
+# 4. Start MongoDB
 Ensure MongoDB is running locally:
 mongosh
 
-### 5. Run the App
+# 5. Run the App
 node app.js
 Visit http://localhost:8080 in your browser.
 
-### Example API Requests
+# Example API Requests
 Signup
 curl -X POST http://localhost:8080/signup -H "Content-Type: application/json" \
 -d '{"username":"john","email":"john@example.com","password":"123456"}'
@@ -52,15 +52,15 @@ curl -X POST http://localhost:3000/books/<BOOK_ID>/reviews \
 -H "Authorization: Bearer <JWT_TOKEN>" \
 -d '{"rating": 5, "comment": "Amazing book!"}'
 
-### Design Decisions & Assumptions
+# Design Decisions & Assumptions
 1. Used JWT + HTTP-only cookie for secure token storage and session handling
 2. MongoDB used for its schema flexibility and ease of integration with Mongoose
 3. EJS used for rendering dynamic UI with Bootstrap
 4.  Each user can leave only one review per book
 5.  Reviews are paginated under each book
 
-### Database Schema
-## User
+# Database Schema
+# User
 {
   username: String,
   email: String,
